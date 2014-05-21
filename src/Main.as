@@ -1,6 +1,7 @@
 package  
 {
 	import br.com.stimuli.loading.BulkProgressEvent;
+	import elements.Reactor;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import br.com.stimuli.loading.BulkLoader;
@@ -49,12 +50,16 @@ package
 			_assetsLoader.removeEventListener(BulkProgressEvent.COMPLETE, onAssetsLoaded);
 			_assetsLoader.removeEventListener(BulkLoader.ERROR, doNothing);
 			
-			addChild(_assetsLoader.getSprite(ASSETS_URL, true));
+			var gfx:Sprite = _assetsLoader.getSprite(ASSETS_URL, true)
+			
+			addChild(gfx);
 			
 			var config:XML = _assetsLoader.getXML(CONFIG_URL, true);
 			
 			_model = new MainDataModel(config.constants,config.init_variables);
 			_controller = new Controller(_model);
+			
+			var reactor = new Reactor(gfx, _model, _controller);
 			
 			addEventListener(Event.ENTER_FRAME, EF);
 			stage.addEventListener(MouseEvent.CLICK, clear);
