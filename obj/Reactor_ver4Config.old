@@ -32,20 +32,20 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\#workspace\#mars\Reactor_ver4\src</path-element>
+      <path-element>C:\#workspace\#mars\ReactorModuleMarsTefo\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>C:\#workspace\#mars\Reactor_ver4\lib\Console2.6+asdoc.swc</path-element>
+      <path-element>C:\#workspace\#mars\ReactorModuleMarsTefo\lib\Console2.6+asdoc.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\#workspace\#mars\Reactor_ver4\src\Main.as</path-element>
+    <path-element>C:\#workspace\#mars\ReactorModuleMarsTefo\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>30</default-frame-rate>
   <default-size>
-    <width>800</width>
-    <height>600</height>
+    <width>1920</width>
+    <height>1080</height>
   </default-size>
 </flex-config>
