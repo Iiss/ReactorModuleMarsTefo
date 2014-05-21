@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<server_url><![CDATA[http://195.14.109.107/set_reaktor.php]]></server_url>
+	<constants>
+		<p1>0</p1>
+		<kInertion>500</kInertion>
+		<MStart>50</MStart>
+		<MFriction>30</MFriction>
+		<kSteam>0.08</kSteam>
+		<kRotor>.6</kRotor>
+		<kGeneration>.5</kGeneration>
+		<kMom>1</kMom>
+		<kIzn>.003</kIzn>
+		<kIznKv>20</kIznKv>
+		<kohl>.01</kohl>
+		<kohl2>.0001</kohl2>
+		<kd>3</kd>
+		<eMax>100000</eMax>
+		<kU>.064</kU>
+		<kTl>.2</kTl>
+		<kI>.0015</kI>
+		<kXeS>.00001</kXeS>
+		<!--  -->
+		<kt12>100</kt12>
+		<kt23>50</kt23>
+		<kt34>2</kt34>
+		<kt45>200</kt45>
+		<kt>0.1</kt>
+		<kXe>0.001</kXe>
+		<eCrit>2000</eCrit>
+	</constants>
+	<init_variables>
+		<!--  [градусы цельсия]-->
+		<t1>20</t1>
+		<t2>20</t2>
+		<t3>20</t3>
+		<t4>20</t4>
+		<t5>20</t5>
+		<!--  -->
+		<v1>500</v1>
+		<v2>1000</v2>
+		<v3>100</v3>
+		<v4>3000000</v4>
+		<v5>10000000</v5>
+		<!--  [КДж/кг*К]-->
+		<c1>1</c1>
+		<c2>4.18</c2>
+		<c3>4.18</c3>
+		<c4>.3</c4>
+		<c5>.3</c5>
+	</init_variables>
+</data>
