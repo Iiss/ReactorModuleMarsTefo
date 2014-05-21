@@ -5,6 +5,8 @@ package
 	import flash.events.Event;
 	import br.com.stimuli.loading.BulkLoader;
 	import com.junkbyte.console.Cc;
+	import models.*;
+	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author liss
@@ -15,6 +17,8 @@ package
 		public const ASSETS_URL:String = "assets/reactor_lib.swf";
 		
 		private var _assetsLoader:BulkLoader
+		private var _model:MainDataModel;
+		private var _controller:Controller;
 		
 		public function Main() 
 		{
@@ -46,6 +50,24 @@ package
 			_assetsLoader.removeEventListener(BulkLoader.ERROR, doNothing);
 			
 			addChild(_assetsLoader.getSprite(ASSETS_URL, true));
+			
+			var config:XML = _assetsLoader.getXML(CONFIG_URL, true);
+			
+			_model = new MainDataModel(config.constants,config.init_variables);
+			_controller = new Controller(_model);
+			
+			addEventListener(Event.ENTER_FRAME, EF);
+			stage.addEventListener(MouseEvent.CLICK, clear);
+		}
+		
+		private function clear(e:MouseEvent):void
+		{
+			if (e.target == stage) _controller.clearSelection();
+		}
+		
+		private function EF(e:Event):void
+		{
+			_controller.update();
 		}
 		
 		private function log(msg:String):void
@@ -56,7 +78,7 @@ package
 			error ? Cc.error(msg) : Cc.log(msg);
 		}
 		
-		private function doNothing(e:Event=null){}
+		private function doNothing(e:Event = null):void{}
 	}
 
 }
