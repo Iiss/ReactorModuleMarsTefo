@@ -1,6 +1,7 @@
 package elements 
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.display.InteractiveObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import models.MainDataModel;
@@ -12,8 +13,14 @@ package elements
 	 */
 	public class Reactor extends Sprite
 	{
-		//Tvels  name
-		private var _tvels:Array = ['r1a','r2d','r3a','r2a','r1d','r3d','r3b','r1b','r2c','r3c','r2b','r1c']
+		private var _tvels:Array = ['r1a', 'r2d', 'r3a', 'r2a', 'r1d', 'r3d', 'r3b', 'r1b', 'r2c', 'r3c', 'r2b', 'r1c'];
+		private var _groupButtons:Array = 
+		[
+			{name:'group_0_btn', group:3}, 
+			{name:'group_1_btn', group:4},
+			{name:'group_2_btn', group:2},
+			{name:'group_3_btn', group:5}
+		];
 
 		//Rods name|selection group|k|dependecy description
 		private var _rods:Array =
@@ -56,8 +63,9 @@ package elements
 
 			_gfx = gfx;
 			
-			drawTvels(model, controller);
-			drawRods(model, controller);
+			setupTvels(controller);
+			setupRods(controller);
+			setupGroupButtons(controller);
 
 			//clear init data
 			_rods = null;
@@ -69,7 +77,24 @@ package elements
 			return _groups;
 		}
 
-		private function drawTvels(model:MainDataModel,controller:Controller):void
+		private function setupGroupButtons(controller:Controller) 
+		{
+			var groupBtn:RodGroupButton;
+			var groupBtnView:InteractiveObject;
+			
+			for (var i:int = 0; i < _groupButtons.length; i++)
+			{
+				groupBtnView = _gfx.getChildByName(_groupButtons[i].name) as InteractiveObject;
+				groupBtn = new RodGroupButton(groupBtnView, groups[_groupButtons[i].group], controller);
+			
+			trace(_groupButtons[i]+':' + groupBtnView);
+			}
+			
+			groupBtn =  null;
+			groupBtnView = null;
+		}
+		
+		private function setupTvels(controller:Controller):void
 		{
 			var t:Tvel
 			var tvelView:Sprite;
@@ -77,14 +102,14 @@ package elements
 			for (var i:int = 0; i < _tvels.length; i++)
 			{
 				tvelView = _gfx.getChildByName(_tvels[i]) as Sprite;
-				t = new Tvel(tvelView,model,controller);	
+				t = new Tvel(tvelView,controller);	
 			}
 			
 			tvelView = null;
 			t = null;
 		}
 
-		private function drawRods(model:MainDataModel,controller:Controller):void
+		private function setupRods(controller:Controller):void
 		{
 			var rodsGfx:DisplayObjectContainer = _gfx;
 			
@@ -101,7 +126,7 @@ package elements
 				rodModel.dependency = _rods[i].dependency;
 				rodModel.k = _rods[i].k;
 
-				r = new Rod(rodView, rodModel, model, controller);
+				r = new Rod(rodView, rodModel, controller);
 
 				if (!_groups[r.group]) _groups[r.group] = new Array;
 

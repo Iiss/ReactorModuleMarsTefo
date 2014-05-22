@@ -16,10 +16,10 @@ package elements
 		public var onClick:NativeSignal;
 		private var _gfx:MovieClip;
 
-		public function Rod(gfx:MovieClip,rodModel:RodDataModel,mainModel:MainDataModel,controller:Controller) 
+		public function Rod(gfx:MovieClip,rodModel:RodDataModel,controller:Controller) 
 		{
 			_controller = controller;
-			mainModel.onUpdate.add(update);
+			
 
 			_gfx = gfx;
 			_gfx.mouseChildren = false;
@@ -29,6 +29,8 @@ package elements
 			onClick.add(onMouseClick);
 
 			_rodData = rodModel;
+			_rodData.onUpdate.add(update);
+			
 			controller.addReactorElementDataModel(_rodData);
 		}
 

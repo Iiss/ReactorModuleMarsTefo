@@ -21,10 +21,10 @@ package elements
 		
 		private var _durabilityIndicator:MovieClip;
 		
-		public function Tvel(gfx:Sprite, model:MainDataModel, controller:Controller) 
+		public function Tvel(gfx:Sprite, controller:Controller) 
 		{
 			_controller = controller;
-			model.onUpdate.add(update);
+			
 			
 			_gfx = gfx;
 			_gfx.mouseChildren = false;
@@ -33,6 +33,8 @@ package elements
 			_durabilityIndicator.stop();
 
 			_tvelData = new TvelDataModel;
+			_tvelData.onUpdate.add(update);
+			
 			controller.addReactorElementDataModel(_tvelData);
 
 			onClick = new NativeSignal(_gfx, MouseEvent.CLICK, MouseEvent);

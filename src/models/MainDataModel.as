@@ -119,6 +119,21 @@ package models
 		
 		public function update():void
 		{
+			for each(var t:TvelDataModel in tvels)
+			{
+				t.onUpdate.dispatch();
+			}
+			
+			for each(var r:RodDataModel in rods)
+			{
+				r.onUpdate.dispatch();
+			}
+			
+			for each(var tu:TurbineDataModel in turbines)
+			{
+				tu.onUpdate.dispatch();
+			}
+			
 			onUpdate.dispatch();
 		}
 		
