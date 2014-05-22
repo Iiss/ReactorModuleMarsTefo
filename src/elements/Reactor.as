@@ -77,7 +77,7 @@ package elements
 			return _groups;
 		}
 
-		private function setupGroupButtons(controller:Controller) 
+		private function setupGroupButtons(controller:Controller):void
 		{
 			var groupBtn:RodGroupButton;
 			var groupBtnView:InteractiveObject;
@@ -86,8 +86,6 @@ package elements
 			{
 				groupBtnView = _gfx.getChildByName(_groupButtons[i].name) as InteractiveObject;
 				groupBtn = new RodGroupButton(groupBtnView, groups[_groupButtons[i].group], controller);
-			
-			trace(_groupButtons[i]+':' + groupBtnView);
 			}
 			
 			groupBtn =  null;
