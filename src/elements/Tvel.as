@@ -2,46 +2,36 @@ package elements
 {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import models.MainDataModel;
 	import models.TvelDataModel;
-	import ru.marstefo.reactor.gui.Tvs;
-	import utils.GraphicsUtils;
 	import org.osflash.signals.natives.NativeSignal;
-	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author liss
 	 */
-	public class Tvel extends Sprite 
+	public class Tvel 
 	{
-		private var _gfx:Tvs
+		private var _gfx:Sprite
 
 		private var _tvelData:TvelDataModel;
-		private var _mainModel:MainDataModel;
 		private var _controller:Controller;
 		public var onClick:NativeSignal;
 		private var  _indicatorMask:Sprite;
-		public function Tvel(model:MainDataModel, controller:Controller) 
+		
+		private var _durabilityIndicator:MovieClip;
+		
+		public function Tvel(gfx:Sprite, model:MainDataModel, controller:Controller) 
 		{
 			_controller = controller;
-
-			_gfx = new Tvs;
-			_gfx.width = _gfx.height = 99.2;
+			model.onUpdate.add(update);
+			
+			_gfx = gfx;
 			_gfx.mouseChildren = false;
 
-		//	_indicatorMask = new Sprite;
-		//	_indicatorMask.
-			_gfx['durability_indicator'].addChild(_indicatorMask);
-		//	_gfx['durability_indicator'].mask = _indicatorMask;
+			_durabilityIndicator = _gfx['durability_indicator'];
+			_durabilityIndicator.stop();
 
-			var value:Number = Math.round(Math.random() * 100);
-			trace('value=' + value);
-			trace(_gfx['durability_indicator'])
-			trace(_gfx['durability_indicator'].mask)
-			GraphicsUtils.drawPieMask(_indicatorMask.graphics, 30, 45, 40, 40,0,8);
-			addChild(_gfx);
-
-			_mainModel = model;
 			_tvelData = new TvelDataModel;
 			controller.addReactorElementDataModel(_tvelData);
 
@@ -51,7 +41,7 @@ package elements
 
 		public function update():void 
 		{
-
+			_durabilityIndicator.gotoAndStop(Math.round(_tvelData.durability));
 		}
 
 		private function onMouseClick(e:MouseEvent):void

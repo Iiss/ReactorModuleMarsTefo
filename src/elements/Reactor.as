@@ -6,32 +6,16 @@ package elements
 	import models.MainDataModel;
 	import models.RodDataModel;
 	import org.osflash.signals.natives.NativeSignal;
-	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author liss
 	 */
 	public class Reactor extends Sprite
 	{
-		//Tvels  name|x|y
-		private var _tvels:Array =
-		[ 
-			{name:'r1a',	x: 674.9, 		y: 171.25 },
-			{name:'r2d',	x: 476.7, 		y: 369.65 },
-			{name:'r3a',	x: 674.9, 		y: 369.65 },
-			{name:'r2a',	x: 872.45, 		y: 369.6 },
-			{name:'r1d',	x: 278.45, 		y: 567.9 },
-			{name:'r3d',	x: 476.8, 		y: 567.9 },
-			{name:'r3b',	x: 873.45, 		y: 567.9 },
-			{name:'r1b',	x: 1070.2, 		y: 567.9 },
-			{name:'r2c',	x: 476.7, 		y: 766.3 },
-			{name:'r3c',	x: 674.9, 		y: 766.3 },
-			{name:'r2b',	x: 873.45, 		y: 762.3 },
-			{name:'r1c',	x: 674.9, 		y: 964.65 }
-		]/**/
+		//Tvels  name
+		private var _tvels:Array = ['r1a','r2d','r3a','r2a','r1d','r3d','r3b','r1b','r2c','r3c','r2b','r1c']
 
-		//Rods name|x|y|rotation|selection group|k|dependecy description
-
+		//Rods name|selection group|k|dependecy description
 		private var _rods:Array =
 		[
 			{name:'s32da', 		group:4,	k:1,	dependency:{stack:1,position:5}},
@@ -72,7 +56,7 @@ package elements
 
 			_gfx = gfx;
 			
-		//	drawTvels(model, controller);
+			drawTvels(model, controller);
 			drawRods(model, controller);
 
 			//clear init data
@@ -84,21 +68,21 @@ package elements
 		{
 			return _groups;
 		}
-/*
+
 		private function drawTvels(model:MainDataModel,controller:Controller):void
 		{
 			var t:Tvel
+			var tvelView:Sprite;
+			
 			for (var i:int = 0; i < _tvels.length; i++)
 			{
-				t = new Tvel(model,controller);
-				t.x = _tvels[i].x;
-				t.y = _tvels[i].y;
-				t.name = _tvels[i].name;
-				addChild(t);
+				tvelView = _gfx.getChildByName(_tvels[i]) as Sprite;
+				t = new Tvel(tvelView,model,controller);	
 			}
-
+			
+			tvelView = null;
 			t = null;
-		}*/
+		}
 
 		private function drawRods(model:MainDataModel,controller:Controller):void
 		{
