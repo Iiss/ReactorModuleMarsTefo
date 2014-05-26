@@ -50,6 +50,8 @@ package elements
 			{name:'s12cb', 	 	group:5,	k:.5, 	dependency:{stack:10,position:11}},
 			{name:'s3b', 		group:3,	k:.5, 	dependency:{stack:6,position:8}}
 		]
+		
+		private var _turbins:Array = ['g1', 'g2', 'g3', 'g4'];
 
 		private var _controller:Controller;
 		private var _groups:Array;
@@ -66,10 +68,13 @@ package elements
 			setupTvels(controller);
 			setupRods(controller);
 			setupGroupButtons(controller);
+			setupTurbins(controller);
 
 			//clear init data
 			_rods = null;
 			_tvels = null;
+			
+			
 		}
 
 		public function get groups():Array
@@ -77,6 +82,21 @@ package elements
 			return _groups;
 		}
 
+		private function setupTurbins(controller:Controller):void
+		{
+			var t:Turbine
+			var turbineView:Sprite;
+			
+			for (var i:int = 0; i < _turbins.length; i++)
+			{
+				turbineView = _gfx.getChildByName(_turbins[i]) as Sprite;
+				t = new Turbine(turbineView,controller);	
+			}
+			
+			turbineView = null;
+			t = null;
+		}
+		
 		private function setupGroupButtons(controller:Controller):void
 		{
 			var groupBtn:RodGroupButton;

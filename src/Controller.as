@@ -23,8 +23,7 @@ package
 
 		public function toggleTurbine(turbine:TurbineDataModel):void
 		{
-			//old ->> turbine.turnedOn == 1 ? turbine.turnedOn = 0:turbine.turnedOn = 0;
-			turbine.turnedOn ? turbine.turnedOn = false:turbine.turnedOn = false;
+			turbine.turnedOn = !turbine.turnedOn;
 			checkGenerators();
 			_model.update();
 		}
@@ -248,7 +247,7 @@ package
 			/**/
 			for (var i:int = 0; i < _model.curElement.length; i++ ) 
 			{
-				if (_model.curElement[i] is ReactorElementDataModel)
+				if (_model.curElement[i] is TvelDataModel)
 				{
 					_model.curElement[i].deep += _model.mC;
 
