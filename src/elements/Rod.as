@@ -25,7 +25,7 @@ package elements
 			_gfx.mouseChildren = false;
 			_gfx.gotoAndStop(1);
 
-			onClick = new NativeSignal(_gfx, MouseEvent.CLICK, MouseEvent);
+			onClick = new NativeSignal(_gfx, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onClick.add(onMouseClick);
 
 			_rodData = rodModel;

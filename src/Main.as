@@ -21,6 +21,8 @@ package
 		private var _model:MainDataModel;
 		private var _controller:Controller;
 		
+		
+		
 		public function Main() 
 		{
 			stage ? init() : addEventListener(Event.ADDED_TO_STAGE, init);
@@ -59,10 +61,10 @@ package
 			_model = new MainDataModel(config.constants,config.init_variables);
 			_controller = new Controller(_model);
 			
-			var reactor = new Reactor(gfx, _model, _controller);
+			var reactor:Reactor = new Reactor(gfx, _model, _controller);
 			
 			addEventListener(Event.ENTER_FRAME, EF);
-			stage.addEventListener(MouseEvent.CLICK, clear);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, clear);
 		}
 		
 		private function clear(e:MouseEvent):void

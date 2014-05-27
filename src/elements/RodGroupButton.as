@@ -18,7 +18,7 @@ package elements
 		{
 			_group = group;
 			_controller = controller;
-			onClick = new NativeSignal(view, MouseEvent.CLICK, MouseEvent);
+			onClick = new NativeSignal(view, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onClick.add(clickHandler);
 		}
 

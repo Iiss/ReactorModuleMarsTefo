@@ -42,7 +42,7 @@ package elements
 			_controller = controller
 			_controller.addReactorElementDataModel(_dataModel);
 			
-			onClick = new NativeSignal(_gfx, MouseEvent.CLICK, MouseEvent);
+			onClick = new NativeSignal(_gfx, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onClick.add(clickHandler);
 		}
 		
@@ -104,6 +104,11 @@ package elements
 					if (e.target == _activeSkin || e.target == _stoppedSkin)
 					{
 						_controller.toggleTurbine(_dataModel);
+						
+						if (_dataModel.turnedOn)
+						{
+							_controller.clearSelection();
+						}
 					}
 					else 
 					{

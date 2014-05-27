@@ -7,6 +7,7 @@ package elements
 	import models.MainDataModel;
 	import models.RodDataModel;
 	import org.osflash.signals.natives.NativeSignal;
+	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author liss
@@ -57,6 +58,7 @@ package elements
 		private var _groups:Array;
 		public var onClick:NativeSignal;
 		private var _gfx:DisplayObjectContainer;
+		public var onStopButtonClick:NativeSignal;
 
 		public function Reactor(gfx:DisplayObjectContainer, model:MainDataModel,controller:Controller) 
 		{
@@ -70,11 +72,13 @@ package elements
 			setupGroupButtons(controller);
 			setupTurbins(controller);
 
+			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
+			onStopButtonClick.add(_controller.stopReactor);
+			
 			//clear init data
 			_rods = null;
 			_tvels = null;
-			
-			
+			_turbins = null;
 		}
 
 		public function get groups():Array
