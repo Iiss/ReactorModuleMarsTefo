@@ -75,6 +75,8 @@ package elements
 			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
 			onStopButtonClick.add(_controller.stopReactor);
 			
+			var turbineValve:TurbineValve = new TurbineValve(_gfx['valve'], model, _controller);
+			
 			//clear init data
 			_rods = null;
 			_tvels = null;
