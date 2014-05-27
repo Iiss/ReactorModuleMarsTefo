@@ -29,7 +29,6 @@ package elements
 			_stoppedSkin			= _gfx["stopped_skin"];
 			_changingSkin 			= _gfx["changing_skin"];
 			_recycleIndicator 		= _changingSkin["recycle_indicator"];
-			_durabilityIndicator 	= _gfx["durability_indicator"];
 			
 			_recycleIndicator.stop();
 			
@@ -49,10 +48,12 @@ package elements
 		
 		public function update():void
 		{
-			_durabilityIndicator.scaleY = _dataModel.durability / 100;
-			
 			_activeSkin.visible = _dataModel.turnedOn;
 			_stoppedSkin.visible = !_dataModel.turnedOn;
+			
+			_activeSkin.visible ? _durabilityIndicator = _activeSkin["durability_indicator"] : _durabilityIndicator = _stoppedSkin["durability_indicator"];
+			
+			_durabilityIndicator.scaleY = _dataModel.durability / 100;
 			
 			_changingSkin.visible = _dataModel.selected || _dataModel.repairing==1;
 			_dataModel.repairing == 1 ? _recycleIndicator.play() : _recycleIndicator.stop();
