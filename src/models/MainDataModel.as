@@ -121,17 +121,17 @@ package models
 		{
 			for each(var t:TvelDataModel in tvels)
 			{
-				t.onUpdate.dispatch();
+				t.notify();
 			}
 			
 			for each(var r:RodDataModel in rods)
 			{
-				r.onUpdate.dispatch();
+				r.notify();
 			}
 			
 			for each(var tu:TurbineDataModel in turbines)
 			{
-				tu.onUpdate.dispatch();
+				tu.notify();
 			}
 			
 			onUpdate.dispatch();

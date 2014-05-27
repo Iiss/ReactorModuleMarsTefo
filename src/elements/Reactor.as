@@ -6,6 +6,7 @@ package elements
 	import flash.display.Sprite;
 	import models.MainDataModel;
 	import models.RodDataModel;
+	import models.TurbineDataModel;
 	import org.osflash.signals.natives.NativeSignal;
 	import flash.events.MouseEvent;
 	/**
@@ -70,12 +71,10 @@ package elements
 			setupTvels(controller);
 			setupRods(controller);
 			setupGroupButtons(controller);
-			setupTurbins(controller);
+			setupTurbins(model, controller);
 
 			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
 			onStopButtonClick.add(_controller.stopReactor);
-			
-			var turbineValve:TurbineValve = new TurbineValve(_gfx['valve'], model, _controller);
 			
 			//clear init data
 			_rods = null;
@@ -88,19 +87,27 @@ package elements
 			return _groups;
 		}
 
-		private function setupTurbins(controller:Controller):void
+		private function setupTurbins(model:MainDataModel, controller:Controller):void
 		{
+			var turbineSystem:TurbineSystem = new TurbineSystem(_gfx['channels'], model);
+			var turbineValve:TurbineValve = new TurbineValve(_gfx['valve'], model, controller);
+			
 			var t:Turbine
-			var turbineView:Sprite;
+			var tView:Sprite;
+			var tModel:TurbineDataModel;
 			
 			for (var i:int = 0; i < _turbins.length; i++)
 			{
-				turbineView = _gfx.getChildByName(_turbins[i]) as Sprite;
-				t = new Turbine(turbineView,controller);	
+				tView = _gfx.getChildByName(_turbins[i]) as Sprite;
+				tModel = new TurbineDataModel();
+				t = new Turbine(tView, tModel, controller);
+				
+				turbineSystem.addTurbine(tModel, i + 1);
 			}
 			
-			turbineView = null;
+			tView = null;
 			t = null;
+			tModel = null;
 		}
 		
 		private function setupGroupButtons(controller:Controller):void

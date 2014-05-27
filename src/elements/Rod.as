@@ -39,9 +39,9 @@ package elements
 			return _rodData.group;
 		}
 
-		public function update():void 
+		public function update(model:RodDataModel):void 
 		{
-			_rodData.selected ? _gfx.gotoAndStop(2) : _gfx.gotoAndStop(1);				
+			model.selected ? _gfx.gotoAndStop(2) : _gfx.gotoAndStop(1);				
 		}
 
 		private function onMouseClick(e:MouseEvent):void

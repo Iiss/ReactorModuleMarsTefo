@@ -21,7 +21,7 @@ package elements
 		public var onClick:NativeSignal;
 		private var _controller:Controller
 		
-		public function Turbine(gfx:Sprite, controller:Controller) 
+		public function Turbine(gfx:Sprite, model:TurbineDataModel, controller:Controller) 
 		{
 			_gfx = gfx;
 			
@@ -36,7 +36,7 @@ package elements
 			_stoppedSkin.mouseChildren = false;
 			_changingSkin.mouseChildren = false;
 			
-			_dataModel = new TurbineDataModel();
+			_dataModel = model;
 			_dataModel.onUpdate.add(update);
 			
 			_controller = controller
@@ -46,17 +46,17 @@ package elements
 			onClick.add(clickHandler);
 		}
 		
-		public function update():void
+		public function update(model:TurbineDataModel):void
 		{
-			_activeSkin.visible = _dataModel.turnedOn;
-			_stoppedSkin.visible = !_dataModel.turnedOn;
+			_activeSkin.visible = model.turnedOn;
+			_stoppedSkin.visible = !model.turnedOn;
 			
 			_activeSkin.visible ? _durabilityIndicator = _activeSkin["durability_indicator"] : _durabilityIndicator = _stoppedSkin["durability_indicator"];
 			
-			_durabilityIndicator.scaleY = _dataModel.durability / 100;
+			_durabilityIndicator.scaleY = model.durability / 100;
 			
-			_changingSkin.visible = _dataModel.selected || _dataModel.repairing==1;
-			_dataModel.repairing == 1 ? _recycleIndicator.play() : _recycleIndicator.stop();
+			_changingSkin.visible = model.selected || model.repairing==1;
+			model.repairing == 1 ? _recycleIndicator.play() : _recycleIndicator.stop();
 			
 			/*
 			

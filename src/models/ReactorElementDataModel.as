@@ -9,7 +9,12 @@ package models
 	{
 		public var selected:Boolean;
 		public var type:String;
-		public var onUpdate:Signal = new Signal;
+		public var onUpdate:Signal = new Signal(ReactorElementDataModel);
+		
+		public function notify():void
+		{
+			onUpdate.dispatch(this);
+		}
 	}
 
 }
