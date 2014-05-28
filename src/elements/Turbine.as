@@ -112,7 +112,8 @@ package elements
 					}
 					else 
 					{
-						_controller.changeTurbine()						
+						_controller.changeTurbine();
+						_controller.clearSelection();
 					}
 				}
 			}

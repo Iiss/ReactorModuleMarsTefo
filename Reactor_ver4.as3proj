@@ -53,6 +53,7 @@
   <libraryPaths>
     <element path="lib\Console2.6+asdoc.swc" />
     <element path="lib\as3-signals-v0.8.swc" />
+    <element path="lib\greensock.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

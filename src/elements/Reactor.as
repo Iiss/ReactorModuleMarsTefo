@@ -80,6 +80,7 @@ package elements
 			_rods = null;
 			_tvels = null;
 			_turbins = null;
+			_groupButtons = null;
 		}
 
 		public function get groups():Array

@@ -1,6 +1,9 @@
 package  
 {
+	import elements.Turbine;
+	import flash.utils.Dictionary;
 	import models.*;
+	import com.greensock.TweenNano;
 	/**
 	 * ...
 	 * @author liss
@@ -8,7 +11,7 @@ package
 	public class Controller 
 	{
 		private var _model:MainDataModel;
-
+		
 		public function Controller(model:MainDataModel) 
 		{
 			_model = model;
@@ -187,9 +190,20 @@ package
 		public function changeTurbine(e:*=null):void
 		{
 			turnOff();
-			(_model.curElement[0] as TurbineDataModel).repairing = 1;
+			var t:TurbineDataModel = _model.curElement[0] as TurbineDataModel;
+			
+			if (t != null)
+			{
+				t.repairing = 1;
+				TweenNano.delayedCall(t.repairTime, onTurbineChangeComplete, [t]);
+			}
 		}
-
+		
+		private function onTurbineChangeComplete(t:TurbineDataModel):void
+		{
+			t.repairing = 0;
+		}
+		
 		public function setMoveTo(targ:Number):void
 		{
 			if (targ < 0) targ = 0;
