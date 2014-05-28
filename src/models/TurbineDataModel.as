@@ -11,7 +11,7 @@ package models
 		public var B:Number = 0; 				//Выходная мощность
 		public var vRotor:Number = 0;
 		public var turnedOn:Boolean = true;
-		public var repairTime = 4; 				//время замены турбины генератора в секундах
+		public var repairTime:Number = 4; 				//время замены турбины генератора в секундах
 		
 		public function TurbineDataModel() 
 		{

@@ -92,6 +92,7 @@ package elements
 		{
 			var turbineSystem:TurbineSystem = new TurbineSystem(_gfx['channels'], model);
 			var turbineValve:TurbineValve = new TurbineValve(_gfx['valve'], model, controller);
+			var coolingControl:CoolingControl = new CoolingControl(_gfx['cooling_control'], model, controller);
 			
 			var t:Turbine
 			var tView:Sprite;
