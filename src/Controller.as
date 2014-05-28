@@ -201,6 +201,8 @@ package
 		
 		private function onTurbineChangeComplete(t:TurbineDataModel):void
 		{
+			t.durability = 80 + Math.random() * 20;
+			t.vRotor = 0;
 			t.repairing = 0;
 		}
 		

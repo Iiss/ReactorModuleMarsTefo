@@ -56,38 +56,12 @@ package elements
 			_durabilityIndicator.scaleY = model.durability / 100;
 			
 			_changingSkin.visible = model.selected || model.repairing==1;
-			model.repairing == 1 ? _recycleIndicator.play() : _recycleIndicator.stop();
+			model.repairing != 0 ? _recycleIndicator.play() : _recycleIndicator.stop();
 			
-			/*
-			
-			if(repairing == 1){
-					
-				if (_heart['rotor'].scaleY > .2)
-				{
-					_heart['rotor'].scaleX -= 0.005;
-					_heart['rotor'].scaleY = _heart['rotor'].scaleX;
-				}
-				else
-				{
-					repairing = -1;
-					_heart.gotoAndStop(2);
-					_heart['rotor'].scaleY = _heart['rotor'].scaleX = .2;	
-				}
-			}
-			else if (repairing == -1)
+			if (_activeSkin.visible)
 			{
-				if (_heart['rotor'].scaleY < 1)
-				{	
-					_heart['rotor'].scaleX += 0.005;
-					_heart['rotor'].scaleY = _heart['rotor'].scaleX;
-				}
-				else
-				{
-					repairing = 0;
-					durability = 80+Math.random()*20;
-					vRotor = 0;
-				}
-			}*/
+				model.vRotor > 0 ? _activeSkin['rotor']['animation'].play() : _activeSkin['rotor']['animation'].stop();
+			}
 		}
 		
 		private function clickHandler(e:MouseEvent):void
@@ -99,7 +73,7 @@ package elements
 			}
 			else 
 			{
-				if (_dataModel.repairing != 1)
+				if (_dataModel.repairing == 0)
 				{
 					if (e.target == _activeSkin || e.target == _stoppedSkin)
 					{
@@ -223,3 +197,33 @@ package ui.turbine
 
 }
 */
+/*
+			
+			if(repairing == 1){
+					
+				if (_heart['rotor'].scaleY > .2)
+				{
+					_heart['rotor'].scaleX -= 0.005;
+					_heart['rotor'].scaleY = _heart['rotor'].scaleX;
+				}
+				else
+				{
+					repairing = -1;
+					_heart.gotoAndStop(2);
+					_heart['rotor'].scaleY = _heart['rotor'].scaleX = .2;	
+				}
+			}
+			else if (repairing == -1)
+			{
+				if (_heart['rotor'].scaleY < 1)
+				{	
+					_heart['rotor'].scaleX += 0.005;
+					_heart['rotor'].scaleY = _heart['rotor'].scaleX;
+				}
+				else
+				{
+					repairing = 0;
+					durability = 80+Math.random()*20;
+					vRotor = 0;
+				}
+			}*/
