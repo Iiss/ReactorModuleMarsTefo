@@ -77,7 +77,11 @@ package elements
 				newAngle = 0;
 			}
 			
-			_slider.rotation = newAngle
+			//_slider.rotation = newAngle;
+			
+			//we can change cooling values in 0-4 range;
+			trace((90 - newAngle) * 4/ 90);
+			_controller.setCooling((90 - newAngle) * 90 / 4);
 		}
 		
 		private function getTargetAngle():Number
@@ -93,7 +97,7 @@ package elements
 		
 		private function update():void
 		{
-		
+			
 		}
 	}
 }
