@@ -1,7 +1,9 @@
 package elements 
 {
 	import flash.display.DisplayObject;
+	import flash.display.Graphics;
 	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 	import models.MainDataModel;
 	import models.ReactorElementDataModel;
@@ -11,14 +13,24 @@ package elements
 	 */
 	public class LinearGraph extends Shape
 	{
-		private var _surface:DisplayObject;
+		private var _surface:Sprite;
 		private var _valueStack:Array;
 		private var _minValue:Number = 0;
 		private var _maxValue:Number = 0;
+		private var _model:MainDataModel;
+		private var _propertyName:String;
+		private var _drawRect:Rectangle;
 		
-		public function LinearGraph(surface:DisplayObject)
+		public function LinearGraph(surface:Sprite,model:MainDataModel,propertyName:String)
 		{
 			_surface = surface;
+			_drawRect = new Rectangle(0, 0, _surface.width, _surface.height);
+			
+			_propertyName = propertyName;
+			_model = model;
+			_model.onUpdate.add(updateGraph);
+			
+			init(_drawRect.width*100);
 		}
 		
 		private function init(resolution:int):void
@@ -34,7 +46,7 @@ package elements
 		private function redrawGraph():void
 		{
 			_surface.graphics.clear();
-			_surface.graphics.lineStyle(2,0xE8D800);
+			_surface.graphics.lineStyle(1,0xcdd381);
 			
 			var delta:Number = _maxValue-_minValue;
 			
@@ -45,11 +57,16 @@ package elements
 			{
 				if (_valueStack[i]!=null)
 				{
-					px = i * _surface.width / (_valueStack.length - 1);
-					py = _surface.height - (_valueStack[i] - _minValue) * (_surface.height / delta);
+					px = i * _drawRect.width / (_valueStack.length - 1);
+					py = _drawRect.height - (_valueStack[i] - _minValue) * (_drawRect.height / delta);
 					i==0 ? _surface.graphics.moveTo(px,py) : _surface.graphics.lineTo(px,py);
 				}
 			}
+		}
+		
+		private function updateGraph():void
+		{
+			update(_model[_propertyName]);
 		}
 		
 		public function update(curValue:Number):void

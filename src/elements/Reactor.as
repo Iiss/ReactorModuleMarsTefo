@@ -76,6 +76,11 @@ package elements
 			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
 			onStopButtonClick.add(_controller.stopReactor);
 			
+			var reactionDiagrams:LinearGraph = new LinearGraph(_gfx['reactions_diagram'],model,'eSumm');
+			var powerDiagram:LinearGraph = new LinearGraph(_gfx['power_diagram'],model,'powerOutput');
+		
+		//	trace('MFriction = ' + model['MFriction']);
+			
 			//clear init data
 			_rods = null;
 			_tvels = null;

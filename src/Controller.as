@@ -110,7 +110,7 @@ package
 			}
 
 			_model.kg = 0;
-			if(_model._globalB > 0) _model.kg = 0.1 + _model._globalB/1000;			
+			if(_model.powerOutput > 0) _model.kg = 0.1 + _model.powerOutput/1000;			
 		}
 
 
@@ -513,7 +513,7 @@ package
 				freeze3Text._visible = false;
 			}*/
 
-			_model._globalB = 0;
+			_model.powerOutput = 0;
 
 			if(_model.t3 > 100) 	_model.p1 += (_model.t3-100)*_model.kSteam;
 			if(_model.lockOpened) 	_model.p1 = 0;
@@ -527,7 +527,7 @@ package
 				if (turbine.durability > 0)
 				{
 					_model.p1 -= turbine.vRotor * _model.kRotor;
-					_model._globalB += turbine.vRotor * _model.kGeneration;
+					_model.powerOutput += turbine.vRotor * _model.kGeneration;
 					turbine.B = turbine.vRotor * _model.kGeneration;
 
 					turbine.durability -= 0.1 * (turbine.vRotor / _model.kIznKv + 1) * _model.kIzn * turbine.vRotor / 5;
@@ -544,7 +544,7 @@ package
 				}
 			}
 
-			_model.totalEnergy += _model._globalB / 30;
+			_model.totalEnergy += _model.powerOutput / 30;
 			_model.update();
 		}
 

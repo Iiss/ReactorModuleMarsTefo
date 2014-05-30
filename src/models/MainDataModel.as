@@ -40,11 +40,10 @@ package models
 		/*
 		 * operation variables
 		 */
-		// [градусы цельсия]
-		public var t1:Number; 	//температура реактора
-		public var t2:Number; 	//температура жидкости
-		public var t3:Number;	//температура генератора
-		public var t4:Number;	//температура в помещении
+		public var t1:Number; 	//температура реактора [градусы цельсия]
+		public var t2:Number; 	//температура жидкости [градусы цельсия]
+		public var t3:Number;	//температура генератора [градусы цельсия]
+		public var t4:Number;	//температура в помещении [градусы цельсия]
 		public var t5:Number;
 		//
 		public var v1:Number;
@@ -68,10 +67,10 @@ package models
 		public var curElement		:Array;
 		public var curElementType	:String = "";
 		public var totalEnergy		:Number = 0;
-		public var _globalB			:Number = 0; //Выход энергии
-		public var lockOpened		:Boolean = true;//false;
-		public var generatorActive	:int = 0;// generator active/unactive status
-		public var kg				:Number = 0;//used in generator update;
+		public var powerOutput		:Number = 0; 		//Выход энергии
+		public var generatorActive	:int = 0;			// generator active/unactive status
+		public var kg				:Number = 0;		//used in generator update;
+		public var lockOpened		:Boolean = true;
 		
 		
 		/*
