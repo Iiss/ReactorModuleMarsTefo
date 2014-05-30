@@ -23,7 +23,6 @@ package elements
 		private var onTrackClick:NativeSignal;
 		private var _initialDelta:Number;
 		
-		
 		public function CoolingControl(gfx:Sprite, model:MainDataModel, controller:Controller)
 		{
 			_slider = gfx['slider'];
@@ -42,13 +41,13 @@ package elements
 		
 		private function trackClickHandler(e:MouseEvent):void
 		{
-			//TweenNano.to(_slider, .3, { rotation:getTargetAngle() } );
+			TweenNano.to(_slider, .3, {rotation: getTargetAngle()});
 			_controller.setCooling(angleToCoolingValue(getTargetAngle()));
 		}
 		
 		private function onStartDrag(e:MouseEvent):void
 		{
-			_initialDelta = getTargetAngle();
+			_initialDelta = getTargetAngle()-_slider.rotation;
 			
 			if (onMouseMove == null)
 			{
@@ -66,22 +65,29 @@ package elements
 		
 		private function onDrag(e:MouseEvent):void
 		{
-			var newAngle:Number = getTargetAngle();
+			var newAngle:Number = getTargetAngle()-_initialDelta;
 			
-			if (newAngle > MAX_ROTATION)
+			if (newAngle > -90 && newAngle < 180)
 			{
-				newAngle = MAX_ROTATION;
+				if (newAngle > MAX_ROTATION)
+				{
+					newAngle = MAX_ROTATION;
+				}
+				
+				if (newAngle < 0)
+				{
+					newAngle = 0;
+				}
+				
+				_slider.rotation = newAngle;
+				
+				_controller.setCooling(angleToCoolingValue(newAngle));
 			}
-			
-			if (newAngle < 0)
+			else
 			{
-				newAngle = 0;
+				stopDrag(e);
 			}
-			
-			_slider.rotation = newAngle;
-			
-			_controller.setCooling(angleToCoolingValue(newAngle));
-			
+		
 		}
 		
 		private function getTargetAngle():Number
@@ -108,7 +114,7 @@ package elements
 		
 		private function update():void
 		{
-			_slider.rotation = coolingToAngleValue(_model.cooling);
+			//_slider.rotation = coolingToAngleValue(_model.cooling);
 		}
 	}
 }
