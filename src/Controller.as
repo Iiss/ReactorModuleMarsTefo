@@ -219,7 +219,7 @@ package
 
 		public function setCooling(cool:Number):void
 		{
-			_model.cooling = cool/4/6;
+			_model.cooling = cool;///4/6;
 		}
 
 

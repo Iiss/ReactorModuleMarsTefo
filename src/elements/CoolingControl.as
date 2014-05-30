@@ -13,6 +13,7 @@ package elements
 	 */
 	public class CoolingControl
 	{
+		private static const MAX_ROTATION:Number = 90;
 		private var _model:MainDataModel;
 		private var _slider:Sprite;
 		private var _controller:Controller;
@@ -21,6 +22,7 @@ package elements
 		private var onMouseMove:NativeSignal;
 		private var onTrackClick:NativeSignal;
 		private var _initialDelta:Number;
+		
 		
 		public function CoolingControl(gfx:Sprite, model:MainDataModel, controller:Controller)
 		{
@@ -31,8 +33,6 @@ package elements
 			_model = model;
 			_model.onUpdate.add(update);
 			
-			_slider.rotation = 45;
-			
 			onMouseDown = new NativeSignal(_slider, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onTrackClick = new NativeSignal(gfx, MouseEvent.CLICK, MouseEvent);
 			
@@ -42,7 +42,8 @@ package elements
 		
 		private function trackClickHandler(e:MouseEvent):void
 		{
-			TweenNano.to(_slider, .3, { rotation:getTargetAngle() } );
+			//TweenNano.to(_slider, .3, { rotation:getTargetAngle() } );
+			_controller.setCooling(angleToCoolingValue(getTargetAngle()));
 		}
 		
 		private function onStartDrag(e:MouseEvent):void
@@ -67,9 +68,9 @@ package elements
 		{
 			var newAngle:Number = getTargetAngle();
 			
-			if (newAngle > 90)
+			if (newAngle > MAX_ROTATION)
 			{
-				newAngle = 90;
+				newAngle = MAX_ROTATION;
 			}
 			
 			if (newAngle < 0)
@@ -77,16 +78,26 @@ package elements
 				newAngle = 0;
 			}
 			
-			//_slider.rotation = newAngle;
+			_slider.rotation = newAngle;
 			
-			//we can change cooling values in 0-4 range;
-			trace((90 - newAngle) * 4/ 90);
-			_controller.setCooling((90 - newAngle) * 90 / 4);
+			_controller.setCooling(angleToCoolingValue(newAngle));
+			
 		}
 		
 		private function getTargetAngle():Number
 		{
 			return MathUtils.angle(_slider.x, _slider.y, _slider.parent.mouseX, _slider.parent.mouseY);
+		}
+		
+		private function angleToCoolingValue(angle:Number):Number
+		{
+			//we can change cooling values in 0-1 range;
+			return 1 - angle / MAX_ROTATION;
+		}
+		
+		private function coolingToAngleValue(cooling:Number):Number
+		{
+			return MAX_ROTATION - cooling * MAX_ROTATION;
 		}
 		
 		private function stopDrag(e:MouseEvent):void
@@ -97,7 +108,7 @@ package elements
 		
 		private function update():void
 		{
-			
+			_slider.rotation = coolingToAngleValue(_model.cooling);
 		}
 	}
 }
