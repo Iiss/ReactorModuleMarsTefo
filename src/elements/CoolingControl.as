@@ -1,6 +1,7 @@
 package elements
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	import models.MainDataModel;
 	import org.osflash.signals.natives.NativeSignal;
 	import flash.events.MouseEvent;
@@ -30,7 +31,9 @@ package elements
 			_controller = controller;
 			
 			_model = model;
-			_model.onUpdate.add(update);
+			//_model.onUpdate.add(update);
+			update();
+			
 			
 			onMouseDown = new NativeSignal(_slider, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onTrackClick = new NativeSignal(gfx, MouseEvent.CLICK, MouseEvent);
@@ -47,7 +50,9 @@ package elements
 		
 		private function onStartDrag(e:MouseEvent):void
 		{
-			_initialDelta = getTargetAngle()-_slider.rotation;
+			TweenNano.killTweensOf(_slider);
+			
+			_initialDelta = 0;// getTargetAngle() - _slider.rotation;
 			
 			if (onMouseMove == null)
 			{
@@ -114,7 +119,7 @@ package elements
 		
 		private function update():void
 		{
-			//_slider.rotation = coolingToAngleValue(_model.cooling);
+			_slider.rotation = coolingToAngleValue(_model.cooling);
 		}
 	}
 }
