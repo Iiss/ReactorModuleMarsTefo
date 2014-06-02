@@ -77,8 +77,11 @@ package elements
 			onStopButtonClick.add(_controller.stopReactor);
 			
 			var reactionDiagrams:LinearGraph = new LinearGraph(_gfx['reactions_diagram'],model,'eSumm');
-			var powerDiagram:LinearGraph = new LinearGraph(_gfx['power_diagram'],model,'powerOutput');
-		
+			var powerDiagram:LinearGraph = new LinearGraph(_gfx['power_diagram'], model, 'powerOutput');
+			
+			var roomTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['room_temperature'], model, 't4', 100);
+		//reactor_temperature
+		//liquid_temperature
 		//	trace('MFriction = ' + model['MFriction']);
 			
 			//clear init data
