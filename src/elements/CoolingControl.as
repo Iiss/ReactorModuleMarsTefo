@@ -31,7 +31,6 @@ package elements
 			_controller = controller;
 			
 			_model = model;
-			//_model.onUpdate.add(update);
 			update();
 			
 			

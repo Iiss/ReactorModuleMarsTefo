@@ -160,8 +160,7 @@ package
 		public function changeTVEL(e:*=null):void
 		{
 			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
-
-
+			
 			if (!tvel) return;
 
 			if(tvel.deep <= 0){
@@ -208,8 +207,8 @@ package
 		
 		public function setMoveTo(targ:Number):void
 		{
-			if (targ < 0) targ = 0;
-			if (targ > 1000) targ = 1000;
+			if (targ < RodDataModel.MIN_DEEP) targ = RodDataModel.MIN_DEEP;
+			if (targ > RodDataModel.MAX_DEEP) targ = RodDataModel.MAX_DEEP;
 
 			for each(var rod:RodDataModel in _model.curElement)
 				rod.movingTo = targ;

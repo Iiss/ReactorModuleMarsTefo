@@ -6,6 +6,8 @@ package models
 	 */
 	public class RodDataModel extends ReactorElementDataModel
 	{
+		public static const MIN_DEEP:Number = 0;
+		public static const MAX_DEEP:Number = 1000;
 		public var deep:Number = 1000;
 		public var I:Number = 0;
 		public var Xe:Number = 0;
