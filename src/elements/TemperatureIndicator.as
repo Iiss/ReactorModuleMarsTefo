@@ -1,12 +1,13 @@
-package elements 
+package elements
 {
 	import flash.display.Sprite;
 	import models.MainDataModel;
+	
 	/**
 	 * ...
 	 * @author liss
 	 */
-	public class TemperatureIndicator 
+	public class TemperatureIndicator
 	{
 		private var _model:MainDataModel;
 		private var _propertyName:String;
@@ -16,6 +17,7 @@ package elements
 		public function TemperatureIndicator(gfx:Sprite, model:MainDataModel, propertyName:String, overdriveValue:Number)
 		{
 			_mask = gfx['bar_mask'];
+			_mask.scaleY = 0;
 			
 			_propertyName = propertyName;
 			_overdriveValue = overdriveValue;
