@@ -213,7 +213,7 @@ package
 			for each(var rod:RodDataModel in _model.curElement)
 				rod.movingTo = targ;
 
-			_model.update();
+			//_model.update();
 		}
 
 		public function setCooling(cool:Number):void

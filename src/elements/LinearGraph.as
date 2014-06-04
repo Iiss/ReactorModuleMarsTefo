@@ -19,7 +19,7 @@ package elements
 		private var _propertyName:String;
 		private var _drawRect:Rectangle;
 		
-		public function LinearGraph(surface:Sprite, model:MainDataModel, propertyName:String, initialMaxValue = 100)
+		public function LinearGraph(surface:Sprite, model:MainDataModel, propertyName:String, initialMaxValue:Number = 100)
 		{
 			_surface = surface;
 			
