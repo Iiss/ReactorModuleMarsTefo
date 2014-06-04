@@ -1,6 +1,8 @@
 package  
 {
+	import adobe.utils.ProductManager;
 	import br.com.stimuli.loading.BulkProgressEvent;
+	import debug.ProtoPanel;
 	import elements.Reactor;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -65,6 +67,9 @@ package
 			
 			addEventListener(Event.ENTER_FRAME, EF);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, clear);
+			
+			/// temp ///
+			var panel:ProtoPanel = new ProtoPanel(this, _model, _controller);
 		}
 		
 		private function clear(e:MouseEvent):void
