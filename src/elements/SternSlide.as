@@ -114,7 +114,12 @@ package elements
 			if ( selection != null)
 			{
 				_label.text = Math.floor(selection.deep).toString();
-				_thumb.y = valueToY(selection.deep);
+				
+				if (!_inDrag)
+				{
+					_thumb.y = valueToY(selection.deep);
+				}
+				
 			}
 		}
 		

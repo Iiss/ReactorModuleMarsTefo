@@ -207,13 +207,22 @@ package
 		
 		public function setMoveTo(targ:Number):void
 		{
-			if (targ < RodDataModel.MIN_DEEP) targ = RodDataModel.MIN_DEEP;
-			if (targ > RodDataModel.MAX_DEEP) targ = RodDataModel.MAX_DEEP;
-
-			for each(var rod:RodDataModel in _model.curElement)
-				rod.movingTo = targ;
-
-			//_model.update();
+			var selection:RodDataModel = _model.curElement[0] as RodDataModel;
+			
+			if (selection != null)
+			{
+				if (targ < RodDataModel.MIN_DEEP) targ = RodDataModel.MIN_DEEP;
+				if (targ > RodDataModel.MAX_DEEP) targ = RodDataModel.MAX_DEEP;
+				
+				for each(var rod:RodDataModel in _model.curElement) 
+				{
+					//rod.movingTo = targ;
+					rod.deep = targ;
+					rod.movingTo = targ;
+				}
+				
+				//_model.update();
+			}
 		}
 
 		public function setCooling(cool:Number):void
