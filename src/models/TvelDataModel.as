@@ -6,6 +6,9 @@ package models
 	 */
 	public class TvelDataModel extends ReactorElementDataModel
 	{
+		public static const MIN_DEEP:Number = 0;
+		public static const MAX_DEEP:Number = 100;
+		
 		public var deep:Number = 100;
 		public var pulling:Boolean = false;
 		public var pushing:Boolean = false;

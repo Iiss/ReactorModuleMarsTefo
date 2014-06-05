@@ -53,7 +53,7 @@ package debug
 			btn = new PushButton(tvelHBox, 10, 10, 'ChangeTvel', _controller.changeTVEL);
 			btn.width = btn.height = 90;
 			
-			btn = new PushButton(tvelHBox, 10, 10, 'Push TVEL', _controller.pullTVEL);
+			btn = new PushButton(tvelHBox, 10, 10, 'Push TVEL', _controller.pushTVEL);
 			btn.width = btn.height = 90;
 			
 			_model.onUpdate.add(update);

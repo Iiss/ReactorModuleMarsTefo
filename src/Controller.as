@@ -149,41 +149,61 @@ package
 
 		public function pullTVEL(e:*=null):void
 		{
-			(_model.curElement[0] as TvelDataModel).pulling = true;
+			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
+			
+			if (tvel != null)
+			{
+				tvel.pulling = true;
+			}	
 		}
 
 		public function pushTVEL(e:*=null):void
 		{
-			(_model.curElement[0] as TvelDataModel).pushing = true;
+			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
+			
+			if (tvel != null)
+			{
+				tvel.pushing = true;
+			}
 		}
 
 		public function changeTVEL(e:*=null):void
 		{
 			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
 			
-			if (!tvel) return;
-
-			if(tvel.deep <= 0){
-				//trace("change");
-				tvel.exlosions = 0;
-				//curElement[0].h._xscale = allR[i].h._yscale = allR[i].shad._xscale = allR[i].shad._yscale = 0;
-				tvel.durability = 100;
+			if (tvel != null) 
+			{
+				if (tvel.deep <= 0)
+				{
+					tvel.exlosions = 0;
+					tvel.durability = 100;
+				}
 			}
 		}
 
 
 		public function turnOff(e:*=null):void
 		{
-			(_model.curElement[0] as TurbineDataModel).turnedOn = false;
-			checkGenerators();
-			_model.update();
+			var turbine:TurbineDataModel = _model.curElement[0] as TurbineDataModel;
+			
+			if (turbine != null)
+			{
+				turbine.turnedOn = false;
+				checkGenerators();
+				_model.update();
+			}
 		}
 
 		public function turnOn(e:*=null):void
 		{
-			(_model.curElement[0] as TurbineDataModel).turnedOn = true;
-			checkGenerators();
-			_model.update();
+			var turbine:TurbineDataModel = _model.curElement[0] as TurbineDataModel;
+			
+			if (turbine != null)
+			{
+				turbine.turnedOn = true;
+				checkGenerators();
+				_model.update();
+			}
 		}
 
 		public function changeTurbine(e:*=null):void
@@ -227,7 +247,7 @@ package
 
 		public function setCooling(cool:Number):void
 		{
-			_model.cooling = cool;///4/6;
+			_model.cooling = cool;
 		}
 
 
@@ -334,7 +354,6 @@ package
 
 
 			//////////////////////// first stand ////////////////////////////
-			//Cc.log('_model.tvels.length='+_model.tvels.length)
 			for (i = 0; i < _model.tvels.length; i++)//each(tvel in _model.tvels)
 			{		
 				tvel = _model.tvels[i];
@@ -345,7 +364,7 @@ package
 				{
 					tvel.deep-= 2;
 				}
-				else if (tvel.pushing && _model.t1 < 400) 
+				else if (tvel.pushing && (_model.t1 < 400)) 
 				{
 					tvel.deep += 2;
 				}
@@ -366,12 +385,10 @@ package
 				//for (var j:int = i + 1; j < 12; j++) {
 				if (i < _model.rodDependencies.length) {
 
-				//	Cc.log(_model.rodDependencies[i].length)
 
 				for (var j:int =0; j < _model.rodDependencies[i].length; j++) {
 
 					var dependRod:RodDataModel = _model.rodDependencies[i][j]
-				//	Cc.log(dependRod+','+dependRod.deep+'  i='+i+'  j='+j);
 
 
 					var deep:Number = dependRod.deep;

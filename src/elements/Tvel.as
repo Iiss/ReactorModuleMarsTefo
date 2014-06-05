@@ -18,6 +18,7 @@ package elements
 		private var _controller:Controller;
 		public var onClick:NativeSignal;
 		private var _indicatorMask:Sprite;
+		private var _core:Sprite;
 		
 		private var _durabilityIndicator:MovieClip;
 		
@@ -28,6 +29,7 @@ package elements
 			_gfx = gfx;
 			_gfx.mouseChildren = false;
 			
+			_core = _gfx['core'];
 			_durabilityIndicator = _gfx['durability_indicator'];
 			_durabilityIndicator.stop();
 			
@@ -43,6 +45,10 @@ package elements
 		public function update(model:TvelDataModel):void
 		{
 			_durabilityIndicator.gotoAndStop(Math.round(model.durability));
+			
+			_core.scaleX = _core.scaleY = .5+.5*Math.abs(_tvelData.deep / (TvelDataModel.MAX_DEEP - TvelDataModel.MIN_DEEP));
+			//public static const MIN_DEEP:Number = 0;
+		//public static const MAX_DEEP:Number = 100;
 		}
 		
 		private function onMouseClick(e:MouseEvent):void
