@@ -36,7 +36,7 @@ package elements
 		
 		private function update():void
 		{
-			_stream.visible = _model.lockOpened;
+			_stream.visible = !_model.lockOpened;
 		}
 		
 		public function addTurbine(t:TurbineDataModel, flowIndex:int):void

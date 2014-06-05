@@ -37,7 +37,7 @@ package elements
 		
 		public function update():void
 		{
-			_model.lockOpened ? _gfx.gotoAndStop(1) : _gfx.gotoAndStop(2);
+			_model.lockOpened ? _gfx.gotoAndStop(2) : _gfx.gotoAndStop(1);
 		}
 	}
 }
