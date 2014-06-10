@@ -21,14 +21,12 @@ package
 		{
 			_model.lockOpened = !_model.lockOpened;
 			checkGenerators();
-			_model.update();
 		}
 
 		public function toggleTurbine(turbine:TurbineDataModel):void
 		{
 			turbine.turnedOn = !turbine.turnedOn;
 			checkGenerators();
-			_model.update();
 		}
 
 		public function pushSelection(sel:*):void
@@ -57,8 +55,6 @@ package
 				throw new Error('Controller.as pushSelection(). Wrong argument type! Only ReactorElementDataModel and Vector.<ReactorElementDataModel> are allowed')
 				return;
 			}
-
-			_model.update();
 		}
 
 		public function clearSelection():void
@@ -69,7 +65,6 @@ package
 			}
 			_model.curElement.length = 0;
 			_model.curElementType = '';
-			_model.update();
 		}
 
 		public function addReactorElementDataModel(el:*):void
@@ -190,7 +185,6 @@ package
 			{
 				turbine.turnedOn = false;
 				checkGenerators();
-				_model.update();
 			}
 		}
 
@@ -202,7 +196,6 @@ package
 			{
 				turbine.turnedOn = true;
 				checkGenerators();
-				_model.update();
 			}
 		}
 
@@ -240,8 +233,6 @@ package
 					rod.deep = targ;
 					rod.movingTo = targ;
 				}
-				
-				//_model.update();
 			}
 		}
 
@@ -490,7 +481,6 @@ package
 			dq = (_model.t2 - _model.t3) * _model.kt23;
 			_model.Q2 -= dq;
 
-			//TODO: WTF cooling?
 			_model.Q2 *= 1 - _model.cooling * _model.kohl;
 
 
