@@ -4,7 +4,7 @@ package
 	import flash.utils.Dictionary;
 	import models.*;
 	import com.greensock.TweenNano;
-	
+	import services.NetworkService;
 	/**
 	 * ...
 	 * @author liss
@@ -257,7 +257,6 @@ package
 		
 		public function update():void
 		{
-			//TODO: send data to server
 			checkGenerators();
 			
 			for (var i:int = 0; i < _model.curElement.length; i++)
@@ -526,6 +525,8 @@ package
 			
 			_model.totalEnergy += _model.powerOutput / 30;
 			_model.update();
+			
+			NetworkService.reportToServer( { power: Math.round(_model.powerOutput)} );
 		}
 	
 	}

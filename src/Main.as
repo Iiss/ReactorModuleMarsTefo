@@ -1,15 +1,15 @@
 package  
 {
-	import adobe.utils.ProductManager;
+	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
+	import com.junkbyte.console.Cc;
 	import debug.ProtoPanel;
 	import elements.Reactor;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import br.com.stimuli.loading.BulkLoader;
-	import com.junkbyte.console.Cc;
-	import models.*;
 	import flash.events.MouseEvent;
+	import models.*;
+	import services.*
 	/**
 	 * ...
 	 * @author liss
@@ -60,6 +60,8 @@ package
 			
 			var config:XML = _assetsLoader.getXML(CONFIG_URL, true);
 			
+			NetworkService.setup(config.server_url.toString());
+			
 			_model = new MainDataModel(config.constants,config.init_variables);
 			_controller = new Controller(_model);
 			
@@ -84,10 +86,8 @@ package
 		
 		private function log(msg:String):void
 		{
-			trace(msg);
-			
 			var error:Boolean = msg.toLowerCase().indexOf("error") != -1;
-			error ? Cc.error(msg) : Cc.log(msg);
+			error ? LogService.log(msg,LogService.ERROR) : LogService.log(msg,LogService.LOG)
 		}
 		
 		private function doNothing(e:Event = null):void{}
