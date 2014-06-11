@@ -9,7 +9,7 @@ package models
 		public static const MIN_DEEP:Number = 0;
 		public static const MAX_DEEP:Number = 100;
 		
-		public var deep:Number = 100;
+		public var deep:Number = MAX_DEEP;
 		public var pulling:Boolean = false;
 		public var pushing:Boolean = false;
 		public var durability:Number = 100; //Износ ТВС
