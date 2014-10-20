@@ -27,9 +27,12 @@ package elements
 		
 		private var _model:MainDataModel;
 		private var _controller:Controller;
+		private var _group:Array;
 		
 		public function SternSlide(gfx:Sprite,model:MainDataModel,controller:Controller) 
 		{
+			//_group = group;
+			
 			_thumb = gfx['thumb'];
 			_label = gfx['label'];
 			_label.embedFonts = true;
@@ -132,5 +135,16 @@ package elements
 		{
 			return _dragRect.y + _dragRect.height - value * _dragRect.height  / (RodDataModel.MAX_DEEP - RodDataModel.MIN_DEEP);
 		}
+		
+		
+		private function clickHandler(e:MouseEvent):void
+		{
+			if (_group)
+			{
+				_controller.clearSelection();
+				_controller.pushSelection(_group);
+			}
+		}
+		
 	}
 }

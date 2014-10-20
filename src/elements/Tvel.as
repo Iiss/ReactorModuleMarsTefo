@@ -54,7 +54,7 @@ package elements
 		private function onMouseClick(e:MouseEvent):void
 		{
 			_controller.clearSelection();
-			_controller.pushSelection(_tvelData);
+			_controller.selectElement(_tvelData);
 		}
 	
 	}

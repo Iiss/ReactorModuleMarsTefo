@@ -84,7 +84,7 @@ package elements
 			var liquidTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['liquid_temperature'], model, 't2', 100);
 			var reactorTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', 100);
 			
-			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_1'],model,controller);
+			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_0'],model,controller);
 			
 			//clear init data
 			_rods = null;

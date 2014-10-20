@@ -29,34 +29,40 @@ package
 			turbine.turnedOn = !turbine.turnedOn;
 			checkGenerators();
 		}
-		
-		public function pushSelection(sel:*):void
+	
+		public function selectElement(element:ReactorElementDataModel):void
 		{
-			if (sel is Array)
+			if (_model.curElementType != element.type)
 			{
-				if (_model.curElementType != sel[0].type)
-					_model.curElement.length = 0;
-				_model.curElement = _model.curElement.concat(sel);
-				_model.curElementType = sel[0].type;
-				
-				for each (var element:ReactorElementDataModel in sel)
+				clearSelection();
+			}
+			
+			if (_model.curElement.indexOf(element) == -1)
+			{
+				_model.curElement.push(element);
+			}
+			
+			_model.curElementType = element.type;
+			element.selected = true;
+		}
+		
+		public function unselectElement(element:ReactorElementDataModel):void
+		{
+			if (_model.curElement!=null && _model.curElement.length>0)
+			{
+				var index:int = _model.curElement.indexOf(element);
+			
+				if (index != -1)
 				{
-					element.selected = true;
+					_model.curElement.splice(index,1);
 				}
-			}
-			else if (sel is ReactorElementDataModel)
-			{
-				if (_model.curElementType != sel.type)
-					_model.curElement.length = 0;
-				_model.curElement.push(sel);
-				_model.curElementType = sel.type;
 				
-				sel.selected = true;
-			}
-			else
-			{
-				throw new Error('Controller.as pushSelection(). Wrong argument type! Only ReactorElementDataModel and Vector.<ReactorElementDataModel> are allowed')
-				return;
+				element.selected = false;
+				
+				if (_model.curElement.length == 0)
+				{
+					_model.curElementType = '';
+				}
 			}
 		}
 		

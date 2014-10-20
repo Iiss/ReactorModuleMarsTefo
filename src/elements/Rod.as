@@ -25,8 +25,8 @@ package elements
 			_gfx.mouseChildren = false;
 			_gfx.gotoAndStop(1);
 
-			onClick = new NativeSignal(_gfx, MouseEvent.MOUSE_DOWN, MouseEvent);
-			onClick.add(onMouseClick);
+		//	onClick = new NativeSignal(_gfx, MouseEvent.MOUSE_DOWN, MouseEvent);
+		//	onClick.add(onMouseClick);
 
 			_rodData = rodModel;
 			_rodData.onUpdate.add(update);
@@ -48,8 +48,7 @@ package elements
 		{
 			if (!_rodData.selected)
 			{
-				_controller.clearSelection();
-				_controller.pushSelection(_rodData);
+				_controller.selectElement(_rodData);
 			}
 		}
 	}

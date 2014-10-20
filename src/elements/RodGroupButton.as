@@ -27,7 +27,10 @@ package elements
 			if (_group)
 			{
 				_controller.clearSelection();
-				_controller.pushSelection(_group);
+				for each (var el:* in _group)
+				{
+				_controller.selectElement(el, false);
+				}
 			}
 		}
 	}

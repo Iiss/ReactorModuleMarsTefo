@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<server_url><![CDATA[http://195.14.109.107/set_reaktor.php]]></server_url>
+	<!--<server_url><![CDATA[http://195.14.109.107/set_reaktor.php]]></server_url>-->
 	<constants>
 		<p1>0</p1>
 		<kInertion>500</kInertion>
