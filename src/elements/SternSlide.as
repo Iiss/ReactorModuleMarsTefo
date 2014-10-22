@@ -28,10 +28,11 @@ package elements
 		private var _model:MainDataModel;
 		private var _controller:Controller;
 		private var _group:Array;
+		private var _isActive:Boolean;
 		
-		public function SternSlide(gfx:Sprite,model:MainDataModel,controller:Controller) 
+		public function SternSlide(gfx:Sprite,group:Array,model:MainDataModel,controller:Controller) 
 		{
-			//_group = group;
+			_group = group;
 			
 			_thumb = gfx['thumb'];
 			_label = gfx['label'];
@@ -57,21 +58,21 @@ package elements
 		
 		private function precisionUpPressed(e:MouseEvent):void 
 		{
-			var selection:RodDataModel = _model.curElement[0] as RodDataModel;
+			var selection:RodDataModel = _group[0] as RodDataModel;
 			
 			if ( selection != null)
 			{
-				_controller.setMoveTo(selection.deep + 1);	
+				moveGroup(selection.deep + 1);	
 			}
 		}
 		
 		private function precisionDownPressed(e:MouseEvent):void 
 		{
-			var selection:RodDataModel = _model.curElement[0] as RodDataModel;
+			var selection:RodDataModel = _group[0] as RodDataModel;
 			
 			if ( selection != null)
 			{
-				_controller.setMoveTo(selection.deep - 1);	
+				moveGroup(selection.deep - 1);	
 			}
 		}
 		
@@ -98,7 +99,8 @@ package elements
 		
 		private function onDrag(e:MouseEvent):void
 		{
-			_controller.setMoveTo(yToValue(_thumb.y));
+			moveGroup(yToValue(_thumb.y));
+			setSelection(true);
 		}
 		
 		private function stopDrag(e:MouseEvent):void
@@ -108,21 +110,25 @@ package elements
 			
 			_thumb.stopDrag();
 			_inDrag = false;
+			
+			setSelection(false);
 		}
 		
 		private function update():void
 		{
-			var selection:RodDataModel = _model.curElement[0] as RodDataModel;
-			
-			if ( selection != null)
+			if (_group != null && _group.length > 0)
 			{
-				_label.text = Math.floor(selection.deep).toString();
+				var selection:RodDataModel = _group[0] as RodDataModel;
 				
-				if (!_inDrag)
+				if ( selection != null)
 				{
-					_thumb.y = valueToY(selection.deep);
-				}
-				
+					_label.text = Math.floor(selection.deep).toString();
+					
+					if (!_inDrag)
+					{
+						_thumb.y = valueToY(selection.deep);
+					}		
+				}	
 			}
 		}
 		
@@ -136,15 +142,30 @@ package elements
 			return _dragRect.y + _dragRect.height - value * _dragRect.height  / (RodDataModel.MAX_DEEP - RodDataModel.MIN_DEEP);
 		}
 		
-		
-		private function clickHandler(e:MouseEvent):void
+		private function moveGroup(deep:Number):void 
 		{
-			if (_group)
+			if (_group != null)
 			{
-				_controller.clearSelection();
-				_controller.pushSelection(_group);
+				for each (var el:RodDataModel in _group)
+				{
+					_controller.moveRodTo(deep, el);
+				}
 			}
 		}
 		
+		private function setSelection(state:Boolean):void
+		{
+			if (_isActive == state) return;
+			
+			if (_group != null)
+			{
+				for each(var el:* in _group) 
+				{
+					state ?_controller.selectElement(el):_controller.unselectElement(el);
+				}
+				
+				_isActive = state;
+			}
+		}
 	}
 }

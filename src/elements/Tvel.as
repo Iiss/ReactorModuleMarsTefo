@@ -45,10 +45,7 @@ package elements
 		public function update(model:TvelDataModel):void
 		{
 			_durabilityIndicator.gotoAndStop(Math.round(model.durability));
-			
 			_core.scaleX = _core.scaleY = .5+.5*Math.abs(_tvelData.deep / (TvelDataModel.MAX_DEEP - TvelDataModel.MIN_DEEP));
-			//public static const MIN_DEEP:Number = 0;
-		//public static const MAX_DEEP:Number = 100;
 		}
 		
 		private function onMouseClick(e:MouseEvent):void

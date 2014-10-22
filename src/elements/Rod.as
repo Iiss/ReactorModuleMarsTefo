@@ -2,7 +2,6 @@ package elements
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	import models.MainDataModel;
 	import models.RodDataModel;
 	import org.osflash.signals.natives.NativeSignal;
 	/**
@@ -19,14 +18,10 @@ package elements
 		public function Rod(gfx:MovieClip,rodModel:RodDataModel,controller:Controller) 
 		{
 			_controller = controller;
-			
 
 			_gfx = gfx;
 			_gfx.mouseChildren = false;
 			_gfx.gotoAndStop(1);
-
-		//	onClick = new NativeSignal(_gfx, MouseEvent.MOUSE_DOWN, MouseEvent);
-		//	onClick.add(onMouseClick);
 
 			_rodData = rodModel;
 			_rodData.onUpdate.add(update);
@@ -42,14 +37,6 @@ package elements
 		public function update(model:RodDataModel):void 
 		{
 			model.selected ? _gfx.gotoAndStop(2) : _gfx.gotoAndStop(1);				
-		}
-
-		private function onMouseClick(e:MouseEvent):void
-		{
-			if (!_rodData.selected)
-			{
-				_controller.selectElement(_rodData);
-			}
 		}
 	}
 }

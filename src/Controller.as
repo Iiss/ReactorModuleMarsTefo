@@ -231,29 +231,21 @@ package
 			t.vRotor = 0;
 			t.repairing = 0;
 		}
-		
-		public function setMoveTo(targ:Number):void
+	
+		public function moveRodTo(deep:Number, rod:RodDataModel):void
 		{
-			var selection:RodDataModel = _model.curElement[0] as RodDataModel;
-			
-			if (selection != null)
+			if (deep < RodDataModel.MIN_DEEP)
 			{
-				if (targ < RodDataModel.MIN_DEEP)
-				{
-					targ = RodDataModel.MIN_DEEP;
-				}
-				
-				if (targ > RodDataModel.MAX_DEEP)
-				{
-					targ = RodDataModel.MAX_DEEP;
-				}
-					
-				for each (var rod:RodDataModel in _model.curElement)
-				{
-					rod.deep = targ;
-					rod.movingTo = targ;
-				}
+				deep = RodDataModel.MIN_DEEP;
 			}
+			
+			if (deep > RodDataModel.MAX_DEEP)
+			{
+				deep = RodDataModel.MAX_DEEP;
+			}
+			
+			rod.deep = deep;
+			rod.movingTo = deep;
 		}
 		
 		public function setCooling(cool:Number):void

@@ -71,7 +71,6 @@ package elements
 			
 			setupTvels(controller);
 			setupRods(controller);
-			setupGroupButtons(controller);
 			setupTurbins(model, controller);
 			
 			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
@@ -84,7 +83,10 @@ package elements
 			var liquidTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['liquid_temperature'], model, 't2', 100);
 			var reactorTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', 100);
 			
-			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_0'],model,controller);
+			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_0'],groups[_groupButtons[0].group],model,controller);
+			var sternSlide2:SternSlide = new SternSlide(_gfx['stern_slide_1'],groups[_groupButtons[1].group],model,controller);
+			var sternSlide3:SternSlide = new SternSlide(_gfx['stern_slide_2'],groups[_groupButtons[2].group],model,controller);
+			var sternSlide4:SternSlide = new SternSlide(_gfx['stern_slide_3'],groups[_groupButtons[3].group],model,controller);
 			
 			//clear init data
 			_rods = null;
@@ -121,22 +123,7 @@ package elements
 			t = null;
 			tModel = null;
 		}
-		
-		private function setupGroupButtons(controller:Controller):void
-		{
-			var groupBtn:RodGroupButton;
-			var groupBtnView:InteractiveObject;
-			
-			for (var i:int = 0; i < _groupButtons.length; i++)
-			{
-				groupBtnView = _gfx.getChildByName(_groupButtons[i].name) as InteractiveObject;
-				groupBtn = new RodGroupButton(groupBtnView, groups[_groupButtons[i].group], controller);
-			}
-			
-			groupBtn = null;
-			groupBtnView = null;
-		}
-		
+	
 		private function setupTvels(controller:Controller):void
 		{
 			var t:Tvel
