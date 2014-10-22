@@ -1,6 +1,7 @@
 package elements 
 {
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import models.RodDataModel;
 	import org.osflash.signals.natives.NativeSignal;
@@ -13,15 +14,16 @@ package elements
 		private var _rodData:RodDataModel;
 		private var _controller:Controller;
 		public var onClick:NativeSignal;
-		private var _gfx:MovieClip;
+		private var _gfx:Sprite;
+		private var _fill:Sprite;
 
-		public function Rod(gfx:MovieClip,rodModel:RodDataModel,controller:Controller) 
+		public function Rod(gfx:Sprite,rodModel:RodDataModel,controller:Controller) 
 		{
 			_controller = controller;
 
 			_gfx = gfx;
 			_gfx.mouseChildren = false;
-			_gfx.gotoAndStop(1);
+			_fill = _gfx['fill'];
 
 			_rodData = rodModel;
 			_rodData.onUpdate.add(update);
@@ -36,7 +38,20 @@ package elements
 
 		public function update(model:RodDataModel):void 
 		{
-			model.selected ? _gfx.gotoAndStop(2) : _gfx.gotoAndStop(1);				
+			if (model.selected || (model.deep!=model.movingTo))
+			{
+				if (_fill.alpha < .8)
+				{
+					_fill.alpha += .1;
+				}
+			}
+			else
+			{
+				if (_fill.alpha > .2)
+				{
+					_fill.alpha -= .05;
+				}
+			}			
 		}
 	}
 }

@@ -256,7 +256,8 @@ package
 		public function update():void
 		{
 			checkGenerators();
-			
+			var i:int = 0;
+			/*
 			for (var i:int = 0; i < _model.curElement.length; i++)
 			{
 				if (_model.curElement[i] is TvelDataModel)
@@ -275,7 +276,7 @@ package
 					}
 				}
 			}
-			
+			*/
 			/* WTF ????
 			   if(oneStep == true){
 			   oneStep = false;
@@ -285,12 +286,12 @@ package
 			for each (var rod:RodDataModel in _model.rods)
 			{
 				
-				if (rod.movingTo >= 0)
+				if (rod.movingTo != rod.deep)
 				{
 					if (Math.abs(rod.deep - rod.movingTo) < _model.ms)
 					{
 						rod.deep = rod.movingTo;
-						rod.movingTo = -1;
+						//rod.movingTo = -1;
 					}
 					else if (rod.deep < rod.movingTo)
 					{
