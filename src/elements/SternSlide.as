@@ -3,16 +3,21 @@ package elements
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
+	import flash.utils.Timer;
 	import models.MainDataModel;
 	import org.osflash.signals.natives.NativeSignal;
 	import flash.events.MouseEvent;
 	import models.RodDataModel;
+	import flash.events.TimerEvent;
 	/**
 	 * ...
 	 * @author liss
 	 */
 	public class SternSlide 
 	{
+		private const PRECISION_STEP:Number = 1;
+		private const PRECISION_DELAY:Number = 500;
+		
 		private var _thumb:Sprite;
 		private var onMouseDown:NativeSignal;
 		private var onMouseUp:NativeSignal;
@@ -30,6 +35,10 @@ package elements
 		private var _group:Array;
 		private var _isActive:Boolean;
 		
+		private var _movingTo:Number = 0;
+		private var _precisionTimer:Timer;
+		private var _onTimer:NativeSignal;
+		
 		public function SternSlide(gfx:Sprite,group:Array,model:MainDataModel,controller:Controller) 
 		{
 			_group = group;
@@ -45,6 +54,14 @@ package elements
 			
 			_model = model;
 			_model.onUpdate.add(update);
+		
+			_precisionTimer = new Timer(PRECISION_DELAY);
+			_onTimer = new NativeSignal(_precisionTimer, TimerEvent.TIMER, TimerEvent);
+			_onTimer.add(updatePrecisionMovement);
+			
+			
+			onMouseUp = new NativeSignal(_thumb.stage, MouseEvent.MOUSE_UP, MouseEvent);
+			onMouseUp.add(stopDrag);
 			
 			upBtnMouseDown = new NativeSignal(gfx['up_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
 			downBtnMouseDown = new NativeSignal(gfx['down_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
@@ -52,47 +69,52 @@ package elements
 			onMouseDown = new NativeSignal(_thumb, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onMouseDown.add(onStartDrag);
 			
-			upBtnMouseDown.add(precisionUpPressed);downBtnMouseDown.add(precisionDownPressed);
+			upBtnMouseDown.add(precisionUpPressed);
+			downBtnMouseDown.add(precisionDownPressed);
 			
+			onMouseMove = new NativeSignal(_thumb.stage, MouseEvent.MOUSE_MOVE, MouseEvent);
 		}
 		
 		private function precisionUpPressed(e:MouseEvent):void 
 		{
-			var selection:RodDataModel = _group[0] as RodDataModel;
-			
-			if ( selection != null)
-			{
-				moveGroup(selection.deep + 1);	
-			}
+			_movingTo = PRECISION_STEP;
+			updatePrecisionMovement();
+			_precisionTimer.start();
+			setSelection(true);
 		}
 		
 		private function precisionDownPressed(e:MouseEvent):void 
 		{
-			var selection:RodDataModel = _group[0] as RodDataModel;
-			
-			if ( selection != null)
+			_movingTo = - PRECISION_STEP;
+			updatePrecisionMovement();
+			_precisionTimer.start();
+			setSelection(true);
+		}
+		
+		private function updatePrecisionMovement(e:TimerEvent=null):void
+		{
+			if (_movingTo != 0)
 			{
-				moveGroup(selection.deep - 1);	
+				for each(var el:RodDataModel in _group)
+				{
+					el.movingTo += _movingTo;
+					if (el.movingTo <  RodDataModel.MIN_DEEP)
+					{
+						el.movingTo = RodDataModel.MIN_DEEP;
+					}
+					
+					if (el.movingTo > RodDataModel.MAX_DEEP)
+					{
+						el.movingTo = RodDataModel.MAX_DEEP
+					}
+				}
 			}
 		}
 		
-		
-		
 		private function onStartDrag(e:MouseEvent):void
 		{
-			if (onMouseMove == null)
-			{
-				onMouseMove = new NativeSignal(_thumb.stage, MouseEvent.MOUSE_MOVE, MouseEvent);
-			}
-			
-			if (onMouseUp == null)
-			{
-				onMouseUp = new NativeSignal(_thumb.stage, MouseEvent.MOUSE_UP, MouseEvent);
-			}
-			
 			onMouseMove.add(onDrag);
-			onMouseUp.add(stopDrag);
-			
+		
 			_thumb.startDrag(false, _dragRect);
 			_inDrag = true;
 		}
@@ -105,8 +127,10 @@ package elements
 		
 		private function stopDrag(e:MouseEvent):void
 		{
+			_precisionTimer.stop();
+			_movingTo = 0;
+			
 			onMouseMove.remove(onDrag);
-			onMouseUp.remove(stopDrag);
 			
 			_thumb.stopDrag();
 			_inDrag = false;
@@ -131,6 +155,8 @@ package elements
 				}	
 			}
 		}
+		
+		
 		
 		private function yToValue(yValue:Number):Number
 		{
