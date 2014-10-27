@@ -98,7 +98,6 @@ package elements
 				case Tvel.READY_TO_CHANGE_STATE:
 					_core.visible = false;
 					_durabilityIndicator.visible = false;
-					
 					_recycle.stop();
 					break;
 					

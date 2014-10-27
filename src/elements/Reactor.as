@@ -5,6 +5,7 @@ package elements
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import models.MainDataModel;
 	import models.RodDataModel;
 	import models.TurbineDataModel;
@@ -55,15 +56,17 @@ package elements
 		]
 		
 		private var _turbins:Array = ['g1', 'g2', 'g3', 'g4'];
-		
+		private var _model:MainDataModel;
 		private var _controller:Controller;
 		private var _groups:Array;
 		public var onClick:NativeSignal;
 		private var _gfx:DisplayObjectContainer;
 		public var onStopButtonClick:NativeSignal;
 		
+		
 		public function Reactor(gfx:DisplayObjectContainer, model:MainDataModel, controller:Controller)
 		{
+			_model = model;
 			_controller = controller;
 			_groups = new Array;
 			
@@ -79,14 +82,16 @@ package elements
 			var reactionDiagrams:LinearGraph = new LinearGraph(_gfx['reactions_diagram'], model, 'eSumm');
 			var powerDiagram:LinearGraph = new LinearGraph(_gfx['power_diagram'], model, 'powerOutput');
 			
-			var roomTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['room_temperature'], model, 't4', 100);
+			var roomTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['room_temperature'], model, 't4', 50);
 			var liquidTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['liquid_temperature'], model, 't2', 100);
-			var reactorTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', 100);
+			var reactorTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', 1000);
 			
 			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_0'],groups[_groupButtons[0].group],model,controller);
 			var sternSlide2:SternSlide = new SternSlide(_gfx['stern_slide_1'],groups[_groupButtons[1].group],model,controller);
 			var sternSlide3:SternSlide = new SternSlide(_gfx['stern_slide_2'],groups[_groupButtons[2].group],model,controller);
 			var sternSlide4:SternSlide = new SternSlide(_gfx['stern_slide_3'],groups[_groupButtons[3].group],model,controller);
+			
+			_model.onUpdate.add(update);
 			
 			//clear init data
 			_rods = null;
@@ -98,6 +103,12 @@ package elements
 		public function get groups():Array
 		{
 			return _groups;
+		}
+		
+		private function update():void
+		{
+			(_gfx['reactions_count'] as TextField).text = Math.floor(_model.eSumm).toString();
+			(_gfx['output_count'] as TextField).text = Math.floor(_model.powerOutput).toString();
 		}
 		
 		private function setupTurbins(model:MainDataModel, controller:Controller):void
