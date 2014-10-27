@@ -43,7 +43,7 @@ package debug
 			tRoomLabel = new Label(vBox, 10, 10);
 			powerLabel = new Label(vBox, 10, 10);
 			
-			tvelHBox = new HBox(window, 20, vBox.height + 30);
+		/*	tvelHBox = new HBox(window, 20, vBox.height + 30);
 			
 			var btn:PushButton;
 			
@@ -54,7 +54,7 @@ package debug
 			btn.width = btn.height = 90;
 			
 			btn = new PushButton(tvelHBox, 10, 10, 'Push TVEL', _controller.pushTVEL);
-			btn.width = btn.height = 90;
+			btn.width = btn.height = 90;*/
 			
 			_model.onUpdate.add(update);
 		}
@@ -67,9 +67,9 @@ package debug
 			tRoomLabel.text = 		'Room Temp:............' + _model.t4;
 			powerLabel.text = 		'Power Output:.........' + _model.powerOutput;
 			
-			var selection:TvelDataModel = _model.curElement[0] as TvelDataModel;
+		//	var selection:TvelDataModel = _model.curElement[0] as TvelDataModel;
 			
-			tvelHBox.enabled = (selection != null);
+			//tvelHBox.enabled = (selection != null);
 		}
 		
 		private function roundToDecimal(value:Number):Number

@@ -157,38 +157,23 @@ package
 				rod.movingTo = 1000;
 		}
 		
-		public function pullTVEL(e:* = null):void
+		public function pullTVEL(tvel:TvelDataModel):void
 		{
-			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
-			
-			if (tvel != null)
-			{
-				tvel.pulling = true;
-			}
+			tvel.pulling = true;
 		}
 		
-		public function pushTVEL(e:* = null):void
+		public function pushTVEL(tvel:TvelDataModel):void
 		{
-			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
-			
-			if (tvel != null)
-			{
-				tvel.pushing = true;
-			}
+			tvel.pushing = true;
 		}
 		
-		public function changeTVEL(e:* = null):void
+		public function changeTVEL(tvel:TvelDataModel):void
 		{
-			var tvel:TvelDataModel = _model.curElement[0] as TvelDataModel;
-			
-			if (tvel != null)
+			if (tvel.deep <= 0)
 			{
-				if (tvel.deep <= 0)
-				{
-					tvel.exlosions = 0;
-					tvel.durability = 100;
-				}
-			}
+				tvel.exlosions = 0;
+				tvel.durability = 100;
+			}			
 		}
 		
 		public function turnOff(e:* = null):void
