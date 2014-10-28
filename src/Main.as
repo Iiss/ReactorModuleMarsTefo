@@ -71,7 +71,7 @@ package
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, clear);
 			
 			/// temp ///
-			var panel:ProtoPanel = new ProtoPanel(this, _model, _controller);
+			//var panel:ProtoPanel = new ProtoPanel(this, _model, _controller);
 		}
 		
 		private function clear(e:MouseEvent):void
