@@ -66,7 +66,6 @@ package elements
 		
 		public function Reactor(gfx:DisplayObjectContainer, model:MainDataModel, controller:Controller)
 		{
-			_model = model;
 			_controller = controller;
 			_groups = new Array;
 			
@@ -79,19 +78,22 @@ package elements
 			onStopButtonClick = new NativeSignal(_gfx['stop_btn'], MouseEvent.MOUSE_DOWN, MouseEvent);
 			onStopButtonClick.add(_controller.stopReactor);
 			
-			var reactionDiagrams:LinearGraph = new LinearGraph(_gfx['reactions_diagram'], model, 'eSumm');
-			var powerDiagram:LinearGraph = new LinearGraph(_gfx['power_diagram'], model, 'powerOutput');
+			var el:*;
 			
-			var roomTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['room_temperature'], model, 't4', 50);
-			var liquidTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['liquid_temperature'], model, 't2', 100);
-			var reactorTempIndicator:TemperatureIndicator = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', 1000);
+			el = new LinearGraph(_gfx['reactions_diagram'], model, 'eSumm');
+			el = new LinearGraph(_gfx['power_diagram'], model, 'powerOutput');
 			
-			var sternSlide1:SternSlide = new SternSlide(_gfx['stern_slide_0'],groups[_groupButtons[0].group],model,controller);
-			var sternSlide2:SternSlide = new SternSlide(_gfx['stern_slide_1'],groups[_groupButtons[1].group],model,controller);
-			var sternSlide3:SternSlide = new SternSlide(_gfx['stern_slide_2'],groups[_groupButtons[2].group],model,controller);
-			var sternSlide4:SternSlide = new SternSlide(_gfx['stern_slide_3'],groups[_groupButtons[3].group],model,controller);
+			el = new TemperatureIndicator(_gfx['temperatures_block']['room_temperature'], model, 't4', model.t4GraduateMax);
+			el = new TemperatureIndicator(_gfx['temperatures_block']['liquid_temperature'], model, 't2', model.t2GraduateMax);
+			el = new TemperatureIndicator(_gfx['temperatures_block']['reactor_temperature'], model, 't1', model.t1GraduateMax);
 			
-			_model.onUpdate.add(update);
+			el = new SternSlide(_gfx['stern_slide_0'],groups[_groupButtons[0].group],model,controller);
+			el = new SternSlide(_gfx['stern_slide_1'],groups[_groupButtons[1].group],model,controller);
+			el = new SternSlide(_gfx['stern_slide_2'],groups[_groupButtons[2].group],model,controller);
+			el = new SternSlide(_gfx['stern_slide_3'],groups[_groupButtons[3].group],model,controller);
+			
+			el = new Counter((_gfx['reactions_count'] as TextField),model,'eSumm');
+			el= new Counter((_gfx['output_count'] as TextField),model,'powerOutput');
 			
 			//clear init data
 			_rods = null;
@@ -103,12 +105,6 @@ package elements
 		public function get groups():Array
 		{
 			return _groups;
-		}
-		
-		private function update():void
-		{
-			(_gfx['reactions_count'] as TextField).text = Math.floor(_model.eSumm).toString();
-			(_gfx['output_count'] as TextField).text = Math.floor(_model.powerOutput).toString();
 		}
 		
 		private function setupTurbins(model:MainDataModel, controller:Controller):void

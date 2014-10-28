@@ -45,6 +45,9 @@ package models
 		public var t3:Number;	//температура генератора [градусы цельсия]
 		public var t4:Number;	//температура в помещении [градусы цельсия]
 		public var t5:Number;
+		public var t1GraduateMax:Number = 1000;
+		public var t2GraduateMax:Number = 400;
+		public var t4GraduateMax:Number = 50;
 		//
 		public var v1:Number;
 		public var v2:Number;
@@ -81,7 +84,6 @@ package models
 		public var turbines	:Vector.<TurbineDataModel>;
 	
 		public var rodDependencies:Array
-		
 		
 		/////// ?????? /////////
 		public var ms		:Number = 4;
