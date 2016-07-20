@@ -10,6 +10,7 @@ package
 	import flash.events.MouseEvent;
 	import models.*;
 	import services.*
+	import flash.ui.Mouse;
 	/**
 	 * ...
 	 * @author liss
@@ -70,8 +71,7 @@ package
 			addEventListener(Event.ENTER_FRAME, EF);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, clear);
 			
-			/// temp ///
-			//var panel:ProtoPanel = new ProtoPanel(this, _model, _controller);
+			Mouse.hide();
 		}
 		
 		private function clear(e:MouseEvent):void
