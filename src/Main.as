@@ -71,7 +71,9 @@ package
 			addEventListener(Event.ENTER_FRAME, EF);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, clear);
 			
-			Mouse.hide();
+			if(parseInt(config.ui.hide_mouse.text())==1){
+				Mouse.hide();
+			};
 		}
 		
 		private function clear(e:MouseEvent):void

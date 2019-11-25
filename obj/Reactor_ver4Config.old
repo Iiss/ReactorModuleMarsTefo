@@ -16,22 +16,34 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'25.06.2016'</value>
+      <value>'25.11.2019'</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::air</name>
+      <value>false</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::mobile</name>
+      <value>false</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::desktop</name>
+      <value>false</value>
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>D:\_mars\ReactorModuleMarsTefo\src</path-element>
+      <path-element>C:\_workspace\ReactorModuleMarsTefo\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>D:\_mars\ReactorModuleMarsTefo\lib\Console2.6+asdoc.swc</path-element>
-      <path-element>D:\_mars\ReactorModuleMarsTefo\lib\as3-signals-v0.8.swc</path-element>
-      <path-element>D:\_mars\ReactorModuleMarsTefo\lib\greensock.swc</path-element>
-      <path-element>D:\_mars\ReactorModuleMarsTefo\lib\MinimalComps_0_9_10.swc</path-element>
+      <path-element>C:\_workspace\ReactorModuleMarsTefo\lib\Console2.6+asdoc.swc</path-element>
+      <path-element>C:\_workspace\ReactorModuleMarsTefo\lib\as3-signals-v0.8.swc</path-element>
+      <path-element>C:\_workspace\ReactorModuleMarsTefo\lib\greensock.swc</path-element>
+      <path-element>C:\_workspace\ReactorModuleMarsTefo\lib\MinimalComps_0_9_10.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>D:\_mars\ReactorModuleMarsTefo\src\Main.as</path-element>
+    <path-element>C:\_workspace\ReactorModuleMarsTefo\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>30</default-frame-rate>

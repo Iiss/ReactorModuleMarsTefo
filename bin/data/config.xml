@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 	<server_url><![CDATA[http://192.168.0.138/set_reaktor.php]]></server_url>
+	<ui>
+		<hide_mouse>0</hide_mouse>
+	</ui>
 	<constants>
 		<p1>0</p1>
 		<kInertion>500</kInertion>
